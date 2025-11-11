@@ -1,0 +1,4 @@
+relationship AutoDetected_76b6fa53-045a-46e8-8b08-81ca2363c1ed
+	fromColumn: fact_treat.PersonKey
+	toColumn: dim_person.PersonKey
+

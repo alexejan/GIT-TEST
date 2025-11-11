@@ -1,0 +1,41 @@
+table dim_person
+	lineageTag: cd41e68d-5ccf-4c48-9b29-07d7a0715605
+
+	column PersonKey
+		dataType: string
+		lineageTag: 6bf32fd6-2912-4d15-bdda-c9d3509fa885
+		summarizeBy: none
+		sourceColumn: PersonKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PersonName
+		dataType: string
+		lineageTag: b133a972-c577-495b-8c5e-1f0a283f4558
+		summarizeBy: none
+		sourceColumn: PersonName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Relation
+		dataType: string
+		lineageTag: 32e6acae-caf7-44cc-848e-9019cc470058
+		summarizeBy: none
+		sourceColumn: Relation
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_person = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\alexej.ahn\OneDrive - IVC Evidensia UK\Documents\Local PBIX\GIT TEST\Data\Dim_Person.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Promoted Headers",{"", "GenerosityLevel", "StrictnessLevel"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

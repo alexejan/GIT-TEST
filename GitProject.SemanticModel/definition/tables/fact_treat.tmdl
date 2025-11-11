@@ -1,0 +1,52 @@
+table fact_treat
+	lineageTag: af7cb419-d732-4dfd-a9c1-706a87d964c8
+
+	column DateKey
+		dataType: string
+		isHidden
+		lineageTag: 30d5374e-02e2-4a41-bfb0-d96e2e2b68b0
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PersonKey
+		dataType: string
+		lineageTag: f0267b91-064b-421b-8d5a-15268318b1f3
+		summarizeBy: none
+		sourceColumn: PersonKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TimesBeggedTriat
+		dataType: string
+		lineageTag: 53834203-4175-4eda-83c5-3a99e11261c9
+		summarizeBy: none
+		sourceColumn: TimesBeggedTriat
+
+		annotation SummarizationSetBy = Automatic
+
+	column TimesGotTreat
+		dataType: string
+		lineageTag: 07911f0b-644b-402d-91c7-0a82a263b42d
+		summarizeBy: none
+		sourceColumn: TimesGotTreat
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_treat = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\alexej.ahn\OneDrive - IVC Evidensia UK\Documents\Local PBIX\GIT TEST\Data\Fact_TiggaGodis_2025_Normalized.csv"),[Delimiter=",", Columns=10, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Promoted Headers",{"", "_1", "_2", "_3", "_4", "_5"})
+				in
+				    #"Removed Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

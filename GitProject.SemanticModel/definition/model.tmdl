@@ -1,0 +1,21 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["fact_treat","dim_person","dim_date","aMeasure"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_treat
+ref table dim_person
+ref table dim_date
+ref table aMeasure
+
+ref cultureInfo en-US
+

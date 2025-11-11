@@ -1,0 +1,27 @@
+table aMeasure
+	lineageTag: 834c70a1-55a1-477c-afb3-86a97d93a689
+
+	measure 1
+		lineageTag: 38a0d052-6a10-49a1-a218-cfd60ea513ce
+
+	column Column1
+		dataType: string
+		isHidden
+		lineageTag: 40a3917b-4764-42b1-ade3-ebb9f3475d2c
+		summarizeBy: none
+		sourceColumn: Column1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition aMeasure = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

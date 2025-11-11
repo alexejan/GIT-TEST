@@ -1,0 +1,57 @@
+table dim_date
+	lineageTag: 516a2d04-cc73-4c9f-892f-806c09a45f2a
+
+	column Date
+		dataType: string
+		lineageTag: 8075cbd3-b8c8-407d-bf8d-79eb17f396b2
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: string
+		lineageTag: 01f2b777-3925-4751-acea-6d08edb81ec4
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: fbb95f46-4b14-4e91-839c-03d9e8f7c4fd
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: d58b5e79-5bdb-45a6-b3fb-ef9b7fa6d02e
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: string
+		lineageTag: 3fb776fb-33f6-4087-a8b1-f817aec6c762
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\alexej.ahn\OneDrive - IVC Evidensia UK\Documents\Local PBIX\GIT TEST\Data\Dim_Date_2025.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Promoted Headers",{"", "_1", "_2", "_3", "_4", "_5", "_6"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
