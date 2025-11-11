@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "THIS IS A SUPER COOL DASHBOARD!",
+                    "value": "THIS IS A SUPER COOL DASHBOARD!!",
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "32pt"
